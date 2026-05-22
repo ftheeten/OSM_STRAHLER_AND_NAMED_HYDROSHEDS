@@ -7,7 +7,9 @@ from collections.abc import Iterable
 import sys
 import copy
 
-FILE="C:\\DEV\\GIS_OSM\\out\\all_rivers_drc_region_osm20260515_all_rivers.gpkg"
+FILE="D:\\DEV\\GIS_OSM\\out_africafull\\africa_full_rivers_only_good.gpkg"
+FILE_NO_NAME="africa_full_rivers_no_name.gpkg"
+FILE_NAME="africa_full_rivers_name.gpkg"
 GPD_NAME=None
 GPD_NO_NAME=None
 DICT_NAME_1={}
@@ -148,7 +150,7 @@ def complete_touching_paths(gpnd, processed=0, iteration=0):
                     geom1=old_geom
                     geom2= line_to_merge["geometry"]
                     geom3=merge_touching_line_string(geom1, geom2)
-                    new_id=line["id_str"]+"_"+line_to_merge["id_str"]
+                    new_id=str(line["id_str"])+"_"+str(line_to_merge["id_str"])
                     #print(new_id)
                     #print(geom3)
                     to_remove.append(line["id_str"])
@@ -252,7 +254,9 @@ def load_file(p_file):
     print(GPD_NO_NAME)
     GPD_NAME=dissolve_on_name(GPD_NAME)
     print(GPD_NAME)
-    GPD_NO_NAME["id_str"]=GPD_NO_NAME["id"].astype(str)
+    GPD_NO_NAME["id_str"]=GPD_NO_NAME["id"]
+    #GPD_NO_NAME["id_str"]=pnd.to_numeric(GPD_NO_NAME['id_str'], downcast='integer', errors='coerce')
+    GPD_NO_NAME["id_str"]=GPD_NO_NAME["id_str"].astype(str)
     
     #for i, row in GPD_NAME.iterrows():
     #   print(row)
@@ -266,7 +270,7 @@ def load_file(p_file):
     GPD_NO_NAME_DEF=GPD_NO_NAME_DEF.drop(["start", "end"], axis=1)
     GPD_NAME=GPD_NAME.drop(["start", "end"], axis=1)
     #print(list(gdf.select_dtypes('geometry').columns))
-    GPD_NO_NAME_DEF.to_file("no_names_3.gpkg", layer='rivers', driver="GPKG", mode="w")
-    GPD_NAME.to_file("names3.gpkg", layer='rivers', driver="GPKG", mode="w")
+    GPD_NO_NAME_DEF.to_file(FILE_NO_NAME, layer='rivers', driver="GPKG", mode="w")
+    GPD_NAME.to_file(FILE_NAME, layer='rivers', driver="GPKG", mode="w")
     
 load_file(FILE)
