@@ -1,7 +1,9 @@
 import geopandas as gpd
 import pandas as pnd
 
-tmp=gpd.read_file("merged.gpkg")
+files = [ ('Geopackages Files', '*.gpkg')]
+FILE= filedialog.askopenfilename(title="input file rivers", filetypes = files, defaultextension = files)
+tmp=gpd.read_file(FILE)
 
 tmp=tmp.drop(columns="wkb")
 

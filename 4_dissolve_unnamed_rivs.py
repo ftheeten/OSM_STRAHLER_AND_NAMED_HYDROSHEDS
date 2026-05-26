@@ -6,10 +6,19 @@ from shapely.ops import linemerge, unary_union
 from collections.abc import Iterable
 import sys
 import copy
+import tkinter as tk
+from tkinter import filedialog
+import tkFileDialog
 
-FILE="D:\\DEV\\GIS_OSM\\out_africafull\\africa_full_rivers_only_good.gpkg"
-FILE_NO_NAME="africa_full_rivers_no_name.gpkg"
-FILE_NAME="africa_full_rivers_name.gpkg"
+root = tk.Tk()
+root.withdraw()
+
+
+files = [ ('Geopackages Files', '*.gpkg')]
+FILE= filedialog.askopenfilename(title="input file rivers", filetypes = files, defaultextension = files)
+
+FILE_NO_NAME=filedialog.asksaveasfile(title="output file unnamed rivers", filetypes = files, defaultextension = files)
+FILE_NAME=filedialog.asksaveasfile(title="output file named rivers", filetypes = files, defaultextension = files)
 GPD_NAME=None
 GPD_NO_NAME=None
 DICT_NAME_1={}

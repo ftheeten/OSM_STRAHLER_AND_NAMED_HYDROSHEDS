@@ -3,7 +3,9 @@ import pandas as pnd
 from glob import glob
 import traceback
 import sys
-files = glob("*.geojson")
+
+
+files = glob("D:\\DEV\\GIS_OSM\\out_india\\*.geojson")
 
 """
 gdfs = [gpd.read_file(f) for f in files]
@@ -34,7 +36,7 @@ for f in files:
         print(traceback.format_exc())
         #sys.exit()
         
-tmp.to_file("merged.gpkg", layer='rivers', driver="GPKG", mode="w")
+tmp.to_file("merged_india.gpkg", layer='rivers', driver="GPKG", mode="w")
 """
 gdf = gpd.GeoDataFrame(
     pd.concat(gdfs, ignore_index=True)

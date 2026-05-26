@@ -7,12 +7,12 @@ import osm2geojson
 import json
 import os
 
-out="D:\\DEV\\GIS_OSM\\out_africafull"
+out="D:\\DEV\\GIS_OSM\\out_india"
 url_overpass="https://overpass-api.de/api/interpreter"
-MIN_X=-26
-MAX_X=55
-MIN_Y=-35
-MAX_Y=38
+MIN_X=68
+MAX_X=142
+MIN_Y=7
+MAX_Y=36
  
 def add_name_to_prop(p_src_json, p_field="tags", to_explode=["name", "waterway"]):
     returned={}
@@ -83,7 +83,7 @@ def get_data(p_min_x, p_max_x, p_min_y, p_max_y, p_step_x, p_step_y, p_out, attr
                                         json.dump(geojson, f, ensure_ascii=False, indent=4)
                                 except ValueError as e:
                                     print("ERROR_JSON_FORMAT")
-                            time.sleep(20)
+                            time.sleep(30)
             except HTTPError as e:
                 print(e.response.text)
             finally:
